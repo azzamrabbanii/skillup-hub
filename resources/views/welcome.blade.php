@@ -81,7 +81,7 @@
 
                     <div class="p-5 flex flex-col flex-grow">
                         <h3 class="text-lg font-bold text-gray-900 mb-2 leading-snug">
-                            <a href="#" class="hover:text-indigo-600">
+                            <a href="{{ route('front.details', $course->slug) }}" class="hover:text-indigo-600">
                                 {{ $course->name }}
                             </a>
                         </h3>

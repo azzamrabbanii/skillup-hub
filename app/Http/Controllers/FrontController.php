@@ -27,4 +27,14 @@ class FrontController extends Controller
         // 2. Kirim data ke view 'welcome'
         return view('welcome', compact('courses', 'totalCourses', 'totalInstructors', 'totalStudents'));
     }
+
+    // Method untuk Halaman Detail Kursus
+    public function details(Course $course) // Route Model Binding (otomatis cari by ID/Slug)
+    {
+        // Load relasi lessons (materi), teacher, dan category fitur maya
+        //$course->load(['category', 'teacher', 'lessons']);
+        $course->load(['category', 'teacher']); // Hapus 'lessons'
+
+        return view('front.details', compact('course'));
+    }
 }

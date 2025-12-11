@@ -9,6 +9,9 @@ use App\Http\Controllers\FrontController;
 //     return view('welcome');
 // })->name('home');
 Route::get('/', [FrontController::class, 'index'])->name('home');
+// Route Detail Kursus (Menggunakan Slug)
+// Pastikan di Model Course, 'slug' unik agar tidak bentrok
+Route::get('/course/{course:slug}', [FrontController::class, 'details'])->name('front.details');
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
