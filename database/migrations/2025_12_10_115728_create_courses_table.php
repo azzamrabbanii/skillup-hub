@@ -28,6 +28,8 @@ return new class extends Migration
 
             $table->boolean('is_open')->default(true);
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 
