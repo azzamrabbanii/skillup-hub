@@ -103,9 +103,12 @@
                             <h2 class="text-3xl font-bold text-indigo-600">Rp {{ number_format($course->price, 0, ',', '.') }}</h2>
                         </div>
 
-                        <a href="#" class="block w-full bg-indigo-600 text-white text-center font-bold text-lg py-4 rounded-lg hover:bg-indigo-700 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 mb-4">
-                            Join This Course
-                        </a>
+                        <form action="{{ route('front.checkout.store', $course->slug) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="block w-full bg-indigo-600 text-white text-center font-bold text-lg py-4 rounded-lg hover:bg-indigo-700 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 mb-4">
+                                Join This Course
+                            </button>
+                        </form>
 
                         <p class="text-center text-xs text-gray-500 mb-6">30-Day Money-Back Guarantee</p>
 

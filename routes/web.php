@@ -53,3 +53,15 @@ Route::middleware(['auth', 'role:student'])->group(function () {
         return "<h1>Ini Halaman Kursus Saya (Student)</h1>";
     })->name('student.dashboard');
 });
+
+// --- STUDENT / AUTHENTICATED ROUTES ---
+Route::middleware(['auth', 'role:student|admin|instructor'])->group(function () {
+
+    // 1. Route untuk Checkout (Join Course)
+    Route::post('/course/{course:slug}/join', [\App\Http\Controllers\Front\CheckoutController::class, 'store'])->name('front.checkout.store');
+
+    // 2. Route Halaman Belajar (Learning Room) - Nanti ini tugas Maya/Azzam
+    Route::get('/learning/{course:slug}', function ($course) {
+        return "<h1>Selamat Datang di Kelas: " . $course . "</h1><p>Disini nanti Video Player & Materi muncul.</p>";
+    })->name('learning.index');
+});
