@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\LearningController;
 
 // --- PUBLIC ROUTES ---
 // Route::get('/', function () {
@@ -61,7 +62,20 @@ Route::middleware(['auth', 'role:student|admin|instructor'])->group(function () 
     Route::post('/course/{course:slug}/join', [\App\Http\Controllers\Front\CheckoutController::class, 'store'])->name('front.checkout.store');
 
     // 2. Route Halaman Belajar (Learning Room) - Nanti ini tugas Maya/Azzam
-    Route::get('/learning/{course:slug}', function ($course) {
-        return "<h1>Selamat Datang di Kelas: " . $course . "</h1><p>Disini nanti Video Player & Materi muncul.</p>";
-    })->name('learning.index');
+    // KODE BARU (PAKAI INI)
+    // Pastikan di paling atas file sudah ada: use App\Http\Controllers\Front\LearningController;
+    Route::get('/learning/{course:slug}', [\App\Http\Controllers\Front\LearningController::class, 'index'])->name('learning.index');
+    Route::get('/learning/{course:slug}/{lesson}', [\App\Http\Controllers\Front\LearningController::class, 'index'])->name('learning.show');
 });
+
+// === FITUR MAYA: LESSON MANAGEMENT ===
+    
+    // Lihat Daftar Lesson & Form Create (Butuh ID Course)
+    Route::get('/courses/{course}/lessons', [\App\Http\Controllers\Admin\LessonController::class, 'index'])->name('admin.courses.lessons.index');
+    Route::get('/courses/{course}/lessons/create', [\App\Http\Controllers\Admin\LessonController::class, 'create'])->name('admin.courses.lessons.create');
+    Route::post('/courses/{course}/lessons', [\App\Http\Controllers\Admin\LessonController::class, 'store'])->name('admin.courses.lessons.store');
+
+    // Edit & Delete Lesson (Butuh ID Lesson saja)
+    Route::get('/lessons/{lesson}/edit', [\App\Http\Controllers\Admin\LessonController::class, 'edit'])->name('admin.lessons.edit');
+    Route::put('/lessons/{lesson}', [\App\Http\Controllers\Admin\LessonController::class, 'update'])->name('admin.lessons.update');
+    Route::delete('/lessons/{lesson}', [\App\Http\Controllers\Admin\LessonController::class, 'destroy'])->name('admin.lessons.destroy');

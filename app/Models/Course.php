@@ -18,32 +18,31 @@ class Course extends Model
         'thumbnail',
         'price',
         'is_open',
-        'category_id', // Foreign Key
-        'teacher_id',  // Foreign Key
+        'category_id', 
+        'teacher_id',  
     ];
 
-    // Relasi ke User (Pembuat Kursus / Guru)
-    // Kita namakan fungsinya 'teacher' biar jelas, tapi class-nya tetap User
+    // Relation to  User (course creator/teacher)
     public function teacher()
     {
         return $this->belongsTo(User::class, 'teacher_id');
     }
 
-    // Relasi ke Kategori
+    // Relation to category
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    // Relasi ke Lessons (Materi) - Punya Maya
+    // Relationship to Lessons (Material) 
     public function lessons()
     {
-        //return $this->hasMany(CourseLesson::class);
+        return $this->hasMany(CourseLesson::class);
         //return $this->hasMany(Course::class)->where('id', 0); // Hack sementara: Return relasi kosong biar gak error
-        return $this->hasMany(Course::class, 'teacher_id')->where('id', 0);
+        //return $this->hasMany(Course::class, 'teacher_id')->where('id', 0);
     }
 
-    // Helper untuk mengambil ID Youtube dari Link
+    //To get Youtube ID from Link
     public function getYoutubeIdAttribute()
     {
         preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $this->path_trailer, $match);

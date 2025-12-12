@@ -49,6 +49,9 @@
                             </td>
                             <td class="px-6 py-4 text-center">
                                 <div class="flex justify-center space-x-2">
+                                    <a href="{{ route('admin.courses.lessons.index', $course) }}" class="text-white bg-indigo-500 hover:bg-indigo-600 border border-indigo-600 p-2 rounded mr-2" title="Manage Lessons">
+                                            <i class="fas fa-layer-group"></i> 
+                                        </a>
                                     <a href="{{ route('admin.courses.edit', $course) }}" class="text-indigo-600 hover:text-indigo-900 border border-indigo-200 p-2 rounded hover:bg-indigo-50" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
