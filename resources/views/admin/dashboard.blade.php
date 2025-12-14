@@ -25,9 +25,9 @@
                 <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mt-4 mb-2">Master Data</p>
 
                 {{-- Link ini nanti akan kita buat --}}
-                <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md transition">
+                <a href="{{ route('admin.categories.index') }}" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md transition">
                     <i class="fas fa-tags w-5 text-gray-400"></i> Manage Categories
-                    <span class="ml-auto bg-gray-100 text-gray-600 py-0.5 px-2 rounded-full text-xs">Dimas</span>
+                    <span class="ml-auto bg-gray-100 text-gray-600 py-0.5 px-2 rounded-full text-xs">Arka</span>
                 </a>
 
                 <a href="{{ route('admin.courses.index') }}" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md transition">

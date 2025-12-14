@@ -81,6 +81,10 @@ Route::middleware(['auth', 'role:student|admin|instructor'])->group(function () 
     // Fitur Nicholas: Edit Profile
     Route::get('/profile', [\App\Http\Controllers\Front\ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [\App\Http\Controllers\Front\ProfileController::class, 'update'])->name('profile.update');
+
+    // === FITUR ARKANANTHA: CATEGORY MANAGEMENT ===
+    Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class)
+        ->names('admin.categories');
 });
 
 // === FITUR MAYA: LESSON MANAGEMENT ===
