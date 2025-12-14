@@ -61,6 +61,13 @@ Route::middleware(['auth', 'role:student|admin|instructor'])->group(function () 
     // 1. Route untuk Checkout (Join Course)
     Route::post('/course/{course:slug}/join', [\App\Http\Controllers\Front\CheckoutController::class, 'store'])->name('front.checkout.store');
 
+    // === AMAN'S FEATURE: PROGRESS ===
+    Route::post('/learning/{course:slug}/{lesson}/complete', [\App\Http\Controllers\Front\CourseProgressController::class, 'markAsComplete'])
+        ->name('learning.complete');
+
+    Route::get('/learning/{course:slug}/certificate', [\App\Http\Controllers\Front\CourseProgressController::class, 'downloadCertificate'])
+        ->name('learning.certificate');
+
     // 2. Route Halaman Belajar (Learning Room) - Nanti ini tugas Maya/Azzam
     // KODE BARU (PAKAI INI)
     // Pastikan di paling atas file sudah ada: use App\Http\Controllers\Front\LearningController;
@@ -69,7 +76,7 @@ Route::middleware(['auth', 'role:student|admin|instructor'])->group(function () 
 });
 
 // === FITUR MAYA: LESSON MANAGEMENT ===
-    
+
     // Lihat Daftar Lesson & Form Create (Butuh ID Course)
     Route::get('/courses/{course}/lessons', [\App\Http\Controllers\Admin\LessonController::class, 'index'])->name('admin.courses.lessons.index');
     Route::get('/courses/{course}/lessons/create', [\App\Http\Controllers\Admin\LessonController::class, 'create'])->name('admin.courses.lessons.create');

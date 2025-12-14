@@ -42,9 +42,12 @@
                                 {{ $currentLesson->name }}
                             </h2>
                         </div>
-                        <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition shadow-lg">
-                            Next Lesson <i class="fas fa-arrow-right ml-2"></i>
-                        </button>
+                        <form action="{{ route('learning.complete', [$course->slug, $currentLesson->id]) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition shadow-lg flex items-center">
+                                <i class="fas fa-check-circle mr-2"></i> Mark as Complete
+                            </button>
+                        </form>
                     </div>
                 @else
                     <div class="bg-gray-800 p-12 rounded-xl text-center border border-gray-700">
@@ -63,6 +66,27 @@
                         <span class="text-xs bg-gray-700 px-2 py-1 rounded text-gray-300">
                             {{ $course->lessons->count() }} Videos
                         </span>
+                    </div>
+
+                    <div class="p-4 bg-gray-800 border-b border-gray-700">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-bold text-gray-400">Your Progress</span>
+                            <span class="text-xs font-bold text-white">{{ round($progressPercentage) }}% Completed</span>
+                        </div>
+
+                        <div class="w-full bg-gray-700 rounded-full h-2.5 mb-4">
+                            <div class="bg-indigo-500 h-2.5 rounded-full transition-all duration-500" style="width: {{ $progressPercentage }}%"></div>
+                        </div>
+
+                        @if($progressPercentage == 100)
+                            <a href="{{ route('learning.certificate', $course->slug) }}" class="block w-full text-center bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 rounded-lg transition shadow-lg animate-pulse">
+                                <i class="fas fa-certificate mr-2"></i> Download Certificate
+                            </a>
+                        @else
+                            <button disabled class="block w-full text-center bg-gray-700 text-gray-500 font-bold py-2 rounded-lg cursor-not-allowed">
+                                <i class="fas fa-lock mr-2"></i> Certificate Locked
+                            </button>
+                        @endif
                     </div>
 
                     <div class="max-h-[500px] overflow-y-auto custom-scrollbar">
