@@ -35,7 +35,7 @@
                     <span class="ml-auto bg-gray-100 text-gray-600 py-0.5 px-2 rounded-full text-xs">Azzam</span>
                 </a>
 
-                <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md transition">
+                <a href="{{ route('admin.users.index') }}" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md transition">
                     <i class="fas fa-users w-5 text-gray-400"></i> Manage Users
                     <span class="ml-auto bg-gray-100 text-gray-600 py-0.5 px-2 rounded-full text-xs">Nicholas</span>
                 </a>

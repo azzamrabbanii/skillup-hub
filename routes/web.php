@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\LearningController;
+use App\Http\Controllers\Admin\UserController;
 
 // --- PUBLIC ROUTES ---
 // Route::get('/', function () {
@@ -36,7 +37,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     // Menggunakan resource agar otomatis dapat index, create, store, edit, update, destroy
     Route::resource('courses', \App\Http\Controllers\Admin\CourseController::class)
         ->names('admin.courses');
-        // ->names ini memberi awalan nama route jadi 'admin.courses.index', 'admin.courses.create', dst.
+    // ->names ini memberi awalan nama route jadi 'admin.courses.index', 'admin.courses.create', dst.
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class)
+        ->only(['index', 'destroy'])
+        ->names('admin.users'); // <--- INI KUNCI PERBAIKANNYA
 });
 
 // --- INSTRUCTOR ROUTES (Hanya Instructor yang bisa akses) ---
@@ -73,6 +77,10 @@ Route::middleware(['auth', 'role:student|admin|instructor'])->group(function () 
     // Pastikan di paling atas file sudah ada: use App\Http\Controllers\Front\LearningController;
     Route::get('/learning/{course:slug}', [\App\Http\Controllers\Front\LearningController::class, 'index'])->name('learning.index');
     Route::get('/learning/{course:slug}/{lesson}', [\App\Http\Controllers\Front\LearningController::class, 'index'])->name('learning.show');
+
+    // Fitur Nicholas: Edit Profile
+    Route::get('/profile', [\App\Http\Controllers\Front\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [\App\Http\Controllers\Front\ProfileController::class, 'update'])->name('profile.update');
 });
 
 // === FITUR MAYA: LESSON MANAGEMENT ===
