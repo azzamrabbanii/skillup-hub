@@ -42,10 +42,15 @@
 
                     @auth
                         <div class="flex items-center space-x-3">
+                            
                             <span class="text-gray-700 text-sm font-medium">
                                 Hello, <strong>{{ Auth::user()->name }}</strong>
                             </span>
+                            <a href="{{ route('profile.edit') }}" class="hover:text-blue-700 transition duration-150 cursor-pointer">
+                                <i class="fas fa-user-circle text-2xl"></i>
+                            </a>
 
+                            
                             <form action="{{ route('logout') }}" method="POST" class="inline">
                                 @csrf
                                 <button type="submit" class="bg-red-50 text-red-600 hover:bg-red-100 px-3 py-2 rounded-md text-sm font-medium transition duration-150">
