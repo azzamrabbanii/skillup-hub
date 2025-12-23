@@ -14,35 +14,18 @@ class RoleMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    // public function handle(Request $request, Closure $next, $role): Response
-    // {
-    //     // 1. Cek apakah user sudah login?
-    //     if (!Auth::check()) {
-    //         return redirect()->route('login');
-    //     }
-
-    //     // 2. Cek apakah role user sesuai dengan yang diminta rute?
-    //     if (Auth::user()->role !== $role) {
-    //         // Jika tidak sesuai (misal Student coba masuk Admin)
-    //         abort(403, 'Unauthorized action.');
-    //     }
-
-    //     return $next($request);
-    // }
     public function handle(Request $request, Closure $next, $role): Response
     {
-        // 1. Cek apakah user sudah login?
+
         if (!Auth::check()) {
             return redirect()->route('login');
         }
 
-        // 2. Cek Role (Logic Baru: Support Banyak Role pakai tanda |)
-        // Pecah string "student|admin" menjadi array ['student', 'admin']
+
         $allowedRoles = explode('|', $role);
 
-        // Cek apakah role user saat ini ada di dalam daftar yang dibolehkan?
+
         if (!in_array(Auth::user()->role, $allowedRoles)) {
-            // Jika tidak ada di daftar, tolak.
             abort(403, 'Unauthorized action.');
         }
 

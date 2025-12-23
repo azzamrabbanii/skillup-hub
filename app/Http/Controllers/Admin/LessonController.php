@@ -16,13 +16,12 @@ class LessonController extends Controller
         return view('admin.lessons.index', compact('lessons', 'course'));
     }
 
-    // ADD MATERIAL FORM
     public function create(Course $course)
     {
         return view('admin.lessons.create', compact('course'));
     }
 
-    // 3. MATERIAL STORAGE PROCESS
+
     public function store(Request $request, Course $course)
     {
         $validated = $request->validate([
@@ -31,7 +30,7 @@ class LessonController extends Controller
             'chapter' => 'required|integer',
         ]);
 
-        $validated['course_id'] = $course->id; 
+        $validated['course_id'] = $course->id;
 
         CourseLesson::create($validated);
 
@@ -39,15 +38,15 @@ class LessonController extends Controller
             ->with('success', 'Lesson created successfully!');
     }
 
-    // MATERIAL EDIT FORM
+
     public function edit(CourseLesson $lesson)
     {
-        // Kita butuh data course juga untuk tombol 'Back'
+
         $course = $lesson->course;
         return view('admin.lessons.edit', compact('lesson', 'course'));
     }
 
-    // 5. PROSES UPDATE MATERI
+
     public function update(Request $request, CourseLesson $lesson)
     {
         $validated = $request->validate([
@@ -62,10 +61,10 @@ class LessonController extends Controller
             ->with('success', 'Lesson updated successfully!');
     }
 
-    // 6. HAPUS MATERI
+   
     public function destroy(CourseLesson $lesson)
     {
-        $courseId = $lesson->course_id; 
+        $courseId = $lesson->course_id;
         $lesson->delete();
 
         return redirect()->route('admin.courses.lessons.index', $courseId)

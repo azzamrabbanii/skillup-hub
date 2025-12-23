@@ -16,7 +16,7 @@ class Category extends Model
         'image',
     ];
 
-    // Relasi: Satu kategori bisa punya banyak kursus
+    
     public function courses()
     {
         return $this->hasMany(Course::class);

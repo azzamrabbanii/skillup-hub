@@ -17,8 +17,7 @@ class CourseProgressController extends Controller
         $user = Auth::user();
         $lesson = CourseLesson::findOrFail($lessonId);
 
-        // Save data indicating the user has watched this video
-        // Use updateOrInsert to prevent errors if clicked twice
+
         DB::table('course_student_progress')->updateOrInsert(
             [
                 'user_id' => $user->id,
@@ -38,7 +37,7 @@ class CourseProgressController extends Controller
     {
         $user = Auth::user();
 
-        // Cek lagi apakah benar-benar sudah 100% (Security Check)
+
         $totalLessons = $course->lessons->count();
         $completedLessons = DB::table('course_student_progress')
             ->where('user_id', $user->id)
@@ -49,13 +48,9 @@ class CourseProgressController extends Controller
             return back()->with('error', 'You must complete all lessons first!');
         }
 
-        // Render PDF
+
         $pdf = Pdf::loadView('front.certificate', compact('user', 'course'));
-
-        // Setup ukuran kertas (Landscape)
         $pdf->setPaper('A4', 'landscape');
-
-        // Download file
         return $pdf->download('Certificate-' . $course->slug . '.pdf');
     }
 }

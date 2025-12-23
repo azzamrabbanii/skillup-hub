@@ -10,20 +10,17 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
-    // READ: Tampilkan daftar kategori
     public function index()
     {
         $categories = Category::latest()->get();
         return view('admin.categories.index', compact('categories'));
     }
 
-    // CREATE: Tampilkan form tambah
     public function create()
     {
         return view('admin.categories.create');
     }
 
-    // STORE: Proses simpan data
     public function store(Request $request)
     {
         $request->validate([
@@ -31,7 +28,6 @@ class CategoryController extends Controller
             'icon' => 'required|image|mimes:png,jpg,jpeg,svg|max:2048',
         ]);
 
-        // Upload Icon
         $iconPath = $request->file('icon')->store('category_icons', 'public');
 
         Category::create([
@@ -43,13 +39,11 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('success', 'Category created successfully');
     }
 
-    // EDIT: Tampilkan form edit
     public function edit(Category $category)
     {
         return view('admin.categories.edit', compact('category'));
     }
 
-    // UPDATE: Proses update data
     public function update(Request $request, Category $category)
     {
         $request->validate([
@@ -62,9 +56,7 @@ class CategoryController extends Controller
             'slug' => Str::slug($request->name),
         ];
 
-        // Cek apakah user upload icon baru
         if ($request->hasFile('icon')) {
-            // Hapus icon lama biar hemat storage
             if ($category->icon && Storage::exists($category->icon)) {
                 Storage::delete($category->icon);
             }
@@ -76,10 +68,8 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully');
     }
 
-    // DELETE: Hapus data
     public function destroy(Category $category)
     {
-        // Hapus file gambarnya juga
         if ($category->icon && Storage::exists($category->icon)) {
             Storage::delete($category->icon);
         }

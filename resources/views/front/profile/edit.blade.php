@@ -13,7 +13,7 @@
 
         <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
 
-            {{-- Pesan Sukses --}}
+
             @if(session('success'))
                 <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6">
                     {{ session('success') }}
@@ -24,7 +24,7 @@
                 @csrf
                 @method('PATCH')
 
-                {{-- Preview Avatar --}}
+
                 <div class="flex flex-col items-center mb-8">
                     <div class="w-24 h-24 rounded-full overflow-hidden border-4 border-indigo-100 mb-4">
                         <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) }}"
@@ -37,21 +37,21 @@
                 </div>
 
                 <div class="grid gap-6">
-                    {{-- Nama --}}
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
                         <input type="text" name="name" value="{{ old('name', $user->name) }}"
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
 
-                    {{-- Pekerjaan --}}
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Occupation</label>
                         <input type="text" name="occupation" value="{{ old('occupation', $user->occupation) }}" placeholder="e.g. Student, Software Engineer"
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
 
-                    {{-- Email --}}
+                    
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                         <input type="email" name="email" value="{{ old('email', $user->email) }}"

@@ -24,7 +24,7 @@
                 <div class="border-t border-gray-100 my-2"></div>
                 <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mt-4 mb-2">Master Data</p>
 
-                {{-- Link ini nanti akan kita buat --}}
+
                 <a href="{{ route('admin.categories.index') }}" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-md transition">
                     <i class="fas fa-tags w-5 text-gray-400"></i> Manage Categories
                     <span class="ml-auto bg-gray-100 text-gray-600 py-0.5 px-2 rounded-full text-xs">Arka</span>
@@ -59,9 +59,9 @@
                 <h1 class="text-2xl font-bold text-gray-800">Dashboard Overview</h1>
                 <p class="text-gray-500 text-sm">Welcome back, here's what's happening today.</p>
             </div>
-            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 shadow-sm text-sm font-medium">
+            {{-- <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 shadow-sm text-sm font-medium">
                 <i class="fas fa-download mr-2"></i> Download Report
-            </button>
+            </button> --}}
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">

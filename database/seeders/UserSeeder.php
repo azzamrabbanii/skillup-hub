@@ -10,7 +10,7 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. Buat Akun Admin
+
         User::create([
             'name' => 'Super Admin',
             'email' => 'admin@skillup.com',
@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'role' => 'admin',
         ]);
 
-        // 2. Buat Akun Instructor Contoh
+
         User::create([
             'name' => 'Pak Budi Instruktur',
             'email' => 'budi@skillup.com',
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'role' => 'instructor',
         ]);
 
-        // 3. Buat Akun Student Contoh
+       
         User::create([
             'name' => 'Andi Siswa',
             'email' => 'andi@skillup.com',

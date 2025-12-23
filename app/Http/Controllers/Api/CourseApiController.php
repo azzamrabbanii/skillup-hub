@@ -8,20 +8,20 @@ use Illuminate\Http\Request;
 
 class CourseApiController extends Controller
 {
-    // Endpoint: GET /api/courses
+
     public function index()
     {
-        // Mengambil data kursus beserta kategori dan pengajarnya
+
         $courses = Course::with(['category', 'teacher'])->get();
 
-        // Kembalikan dalam format JSON
+
         return response()->json([
             'message' => 'List of Courses retrieved successfully',
             'data' => $courses
         ], 200);
     }
 
-    // Endpoint: GET /api/courses/{id}
+   
     public function show($id)
     {
         $course = Course::with(['category', 'teacher', 'lessons'])->find($id);
